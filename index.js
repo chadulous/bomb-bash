@@ -7,7 +7,7 @@ import Bomb from "./Bomb/Bomb.js";
 import ExplosionParticle from "./ExplosionParticle/ExplosionParticle.js";
 
 const stage = new Stage({ costumeNumber: 1 });
-
+noise.seed(Math.round(Math.random()) * 65536);
 const sprites = {
   Stone: new Stone({
     x: -231,
@@ -16,7 +16,7 @@ const sprites = {
     costumeNumber: 1,
     size: 100,
     visible: true,
-    layerOrder: 4
+    layerOrder: 4,
   }),
   Sand: new Sand({
     x: -231,
@@ -25,7 +25,7 @@ const sprites = {
     costumeNumber: 1,
     size: 100,
     visible: true,
-    layerOrder: 3
+    layerOrder: 3,
   }),
   Bomb: new Bomb({
     x: -42,
@@ -34,7 +34,7 @@ const sprites = {
     costumeNumber: 1,
     size: 100,
     visible: true,
-    layerOrder: 2
+    layerOrder: 2,
   }),
   ExplosionParticle: new ExplosionParticle({
     x: -60,
@@ -43,11 +43,11 @@ const sprites = {
     costumeNumber: 1,
     size: 100,
     visible: true,
-    layerOrder: 1
-  })
+    layerOrder: 1,
+  }),
 };
 
 const project = new Project(stage, sprites, {
-  frameRate: 30 // Set to 60 to make your project run faster
+  frameRate: 30, // Set to 60 to make your project run faster
 });
 export default project;

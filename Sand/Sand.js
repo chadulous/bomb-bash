@@ -33,16 +33,19 @@ export default class Sand extends Sprite {
 
   *left() {
     for (let i = 0; i < 20; i++) {
+      this.warp(this.placeSand)();
       this.x -= 18;
     }
   }
 
   *down() {
+    this.warp(this.placeSand)();
     this.y -= 18;
   }
 
   *right() {
     for (let i = 0; i < 20; i++) {
+      this.warp(this.placeSand)();
       this.x += 18;
     }
   }
@@ -50,6 +53,7 @@ export default class Sand extends Sprite {
   *fillArea() {
     this.x += 18;
     this.y -= 18;
+
     while (!(this.x === 147 && this.y === -27)) {
       if (this.x === -213) {
         this.warp(this.right)();
@@ -62,17 +66,21 @@ export default class Sand extends Sprite {
           this.warp(this.down)();
         }
       }
-      if (
-        !(
-          (this.x === -199 && this.y === 155) ||
-          (this.x === -215 && this.y === 139) ||
-            (this.x === -215 && this.y === 155) ||
-          this.touching(Color.rgb(159, 165, 189))
-        )
-      ) {
-        this.say("HERE");
-      }
     }
     this.goto(-231, 171);
+  }
+  *placeSand() {
+    console.log([this.x, this.y]);
+    if (
+      !(
+        [this.x, this.y] in
+        [
+          [-213, 153],
+          [-195, 153]
+        ]
+      )
+    ) {
+      this.createClone();
+    }
   }
 }

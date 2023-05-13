@@ -28,16 +28,15 @@ export default class Stone extends Sprite {
   }
 
   *whenGreenFlagClicked() {
-    this.vars.startY =
-      this.stage.vars.proportions.height / 2 -
-      this.stage.vars.proportions.blockSize / 2;
     this.vars.startX =
       this.stage.vars.proportions.width / -2 +
       this.stage.vars.proportions.blockSize / 2;
+    this.vars.startY =
+      this.stage.vars.proportions.height / 2 -
+      this.stage.vars.proportions.blockSize / 2;
     this.goto(this.vars.startX, this.vars.startY);
-    console.log(this.vars.startX + this.stage.vars.proportions.blockSize * 22);
     yield* this.buildBorders();
-    // yield* this.buildInnerMap();
+    yield* this.buildInnerMap();
   }
 
   *buildBorders() {
@@ -45,7 +44,7 @@ export default class Stone extends Sprite {
     while (
       !(
         this.y ===
-        this.vars.startY - this.stage.vars.proportions.blockSize * 11
+        this.vars.startY - this.stage.vars.proportions.blockSize * 12
       )
     ) {
       this.y -= this.stage.vars.proportions.blockSize;
@@ -74,38 +73,51 @@ export default class Stone extends Sprite {
   *buildInnerMap() {
     this.y -= this.stage.vars.blockSize * 2;
     this.x += this.stage.vars.blockSize * 2;
-    this.createClone();
+    const endX = -this.x;
+    const endY = -this.y;
     let i = 1;
-    while (!(this.x === 129 && this.y === -9)) {
+    while (!(this.x === endX && this.y === endY)) {
       if (this.toNumber(i) % 2 === 0) {
         this.warp(this.innerBlocksLeft)();
       } else {
         this.warp(this.innerBlocksRight)();
       }
-      if (!(this.x === 129 && this.y === -9)) {
+      if (!(this.x === endX && this.y === endY)) {
         this.warp(this.innerBlocksDown)();
       }
       i++;
     }
     i = 1;
-    this.goto(0, this.vars.startY);
+    this.goto(endX, endY);
   }
 
   *innerBlocksRight() {
-    while (!(this.x === 129)) {
-      this.x += 36;
+    while (
+      !(
+        this.x ===
+        this.stage.vars.proportions.width / 2 -
+          (this.stage.vars.proportions.blockSize / 2) * 5
+      )
+    ) {
+      this.x += this.stage.vars.proportions.blockSize * 2;
       this.createClone();
     }
   }
 
   *innerBlocksDown() {
-    this.y -= 36;
+    this.y -= this.stage.vars.proportions.blockSize * 2;
     this.createClone();
   }
 
   *innerBlocksLeft() {
-    while (!(this.x === -195)) {
-      this.x -= 36;
+    while (
+      !(
+        this.x ===
+        this.stage.vars.proportions.width / -2 +
+          (this.stage.vars.proportions.blockSize / 2) * 5
+      )
+    ) {
+      this.x -= this.stage.vars.proportions.blockSize * 2;
       this.createClone();
     }
   }

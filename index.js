@@ -7,7 +7,7 @@ import Stage from "./Stage/Stage.js";
 import Stone from "./Stone/Stone.js";
 
 const gameSize = 1;
-const base_height = 216;
+const base_height = 234;
 const base_width = 414;
 const height = gameSize * base_height;
 const width = gameSize * base_width;
@@ -17,7 +17,6 @@ const stage = new Stage(
   { height, width, costumeNumber: 1 },
   { width, height, gameSize, blockSize }
 );
-noise.seed(Math.round(Math.random()) * 65536);
 const sprites = {
   Stone: new Stone({
     x: -231,

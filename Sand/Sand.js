@@ -38,6 +38,7 @@ export default class Sand extends Sprite {
   }
 
   *whenGreenFlagClicked() {
+    noise.seed(Math.round(Math.random() * 65536));
     yield* this.fillArea();
   }
 

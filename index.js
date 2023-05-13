@@ -1,10 +1,10 @@
 import { Project } from "https://unpkg.com/leopard@^1/dist/index.esm.js";
 
-import Stage from "./Stage/Stage.js";
-import Stone from "./Stone/Stone.js";
-import Sand from "./Sand/Sand.js";
 import Bomb from "./Bomb/Bomb.js";
 import ExplosionParticle from "./ExplosionParticle/ExplosionParticle.js";
+import Sand from "./Sand/Sand.js";
+import Stage from "./Stage/Stage.js";
+import Stone from "./Stone/Stone.js";
 
 const gameSize = 1;
 const base_height = 216;

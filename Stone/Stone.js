@@ -15,38 +15,48 @@ export default class Stone extends Sprite {
 
     this.costumes = [
       new Costume("tile_0020", "./Stone/costumes/tile_0020.png", {
-        x : 18,
-        y : 18,
+        x: 18,
+        y: 18,
       }),
     ];
 
-    this.sounds = [ new Sound("pop", "./Stone/sounds/pop.wav") ];
+    this.sounds = [new Sound("pop", "./Stone/sounds/pop.wav")];
 
     this.triggers = [
       new Trigger(Trigger.GREEN_FLAG, this.whenGreenFlagClicked),
     ];
   }
 
-  * whenGreenFlagClicked() {
-    this.vars.startY = this.stage.vars.proportions.height / 2 -
-                       this.stage.vars.proportions.blockSize / 2;
-    this.vars.startX = this.stage.vars.proportions.width / -2 +
-                       this.stage.vars.proportions.blockSize / 2;
+  *whenGreenFlagClicked() {
+    this.vars.startY =
+      this.stage.vars.proportions.height / 2 -
+      this.stage.vars.proportions.blockSize / 2;
+    this.vars.startX =
+      this.stage.vars.proportions.width / -2 +
+      this.stage.vars.proportions.blockSize / 2;
     this.goto(this.vars.startX, this.vars.startY);
     console.log(this.vars.startX + this.stage.vars.proportions.blockSize * 22);
     yield* this.buildBorders();
     // yield* this.buildInnerMap();
   }
 
-  * buildBorders() {
+  *buildBorders() {
     this.createClone();
-    while (!(this.y ===
-             this.vars.startY - this.stage.vars.proportions.blockSize * 11)) {
+    while (
+      !(
+        this.y ===
+        this.vars.startY - this.stage.vars.proportions.blockSize * 11
+      )
+    ) {
       this.y -= this.stage.vars.proportions.blockSize;
       this.createClone();
     }
-    while (!(this.x ===
-             this.vars.startX + this.stage.vars.proportions.blockSize * 22)) {
+    while (
+      !(
+        this.x ===
+        this.vars.startX + this.stage.vars.proportions.blockSize * 22
+      )
+    ) {
       this.x += this.stage.vars.proportions.blockSize;
       this.createClone();
     }
@@ -61,7 +71,7 @@ export default class Stone extends Sprite {
     this.goto(this.vars.startX, this.vars.startY);
   }
 
-  * buildInnerMap() {
+  *buildInnerMap() {
     this.y -= this.stage.vars.blockSize * 2;
     this.x += this.stage.vars.blockSize * 2;
     this.createClone();
@@ -81,19 +91,19 @@ export default class Stone extends Sprite {
     this.goto(0, this.vars.startY);
   }
 
-  * innerBlocksRight() {
+  *innerBlocksRight() {
     while (!(this.x === 129)) {
       this.x += 36;
       this.createClone();
     }
   }
 
-  * innerBlocksDown() {
+  *innerBlocksDown() {
     this.y -= 36;
     this.createClone();
   }
 
-  * innerBlocksLeft() {
+  *innerBlocksLeft() {
     while (!(this.x === -195)) {
       this.x -= 36;
       this.createClone();

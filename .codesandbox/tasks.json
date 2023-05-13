@@ -6,7 +6,7 @@
   "tasks": {
     "npx http-server": {
       "name": "serve",
-      "command": "npx http-server",
+      "command": "npx http-server -c-1",
       "runAtStart": true
     }
   }

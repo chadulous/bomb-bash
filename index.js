@@ -6,7 +6,17 @@ import Sand from "./Sand/Sand.js";
 import Bomb from "./Bomb/Bomb.js";
 import ExplosionParticle from "./ExplosionParticle/ExplosionParticle.js";
 
-const stage = new Stage({ costumeNumber: 1 });
+const gameSize = 1;
+const base_height = 216;
+const base_width = 414;
+const height = gameSize * base_height;
+const width = gameSize * base_width;
+const blockSize = 18 * gameSize;
+
+const stage = new Stage(
+  { height, width, costumeNumber: 1 },
+  { width, height, gameSize, blockSize }
+);
 noise.seed(Math.round(Math.random()) * 65536);
 const sprites = {
   Stone: new Stone({
@@ -14,7 +24,7 @@ const sprites = {
     y: 171,
     direction: 90,
     costumeNumber: 1,
-    size: 100,
+    size: 100 * gameSize,
     visible: true,
     layerOrder: 4,
   }),
@@ -23,7 +33,7 @@ const sprites = {
     y: 171,
     direction: 90,
     costumeNumber: 1,
-    size: 100,
+    size: 100 * gameSize,
     visible: true,
     layerOrder: 3,
   }),
@@ -32,7 +42,7 @@ const sprites = {
     y: -81,
     direction: 90,
     costumeNumber: 1,
-    size: 100,
+    size: 100 * gameSize,
     visible: true,
     layerOrder: 2,
   }),
@@ -41,7 +51,7 @@ const sprites = {
     y: -36,
     direction: 90,
     costumeNumber: 1,
-    size: 100,
+    size: 100 * gameSize,
     visible: true,
     layerOrder: 1,
   }),

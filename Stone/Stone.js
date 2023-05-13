@@ -28,34 +28,52 @@ export default class Stone extends Sprite {
   }
 
   *whenGreenFlagClicked() {
+    this.vars.startY =
+      this.stage.vars.proportions.height / 2 -
+      this.stage.vars.proportions.blockSize / 2;
+    this.vars.startX =
+      this.stage.vars.proportions.width / -2 +
+      this.stage.vars.proportions.blockSize / 2;
+    this.goto(this.vars.startX, this.vars.startY);
+    console.log(this.vars.startX + this.stage.vars.proportions.blockSize * 22);
     yield* this.buildBorders();
-    yield* this.buildInnerMap();
+    // yield* this.buildInnerMap();
   }
 
   *buildBorders() {
     this.createClone();
-    while (!(this.y === -45)) {
-      this.y -= 18;
+    while (
+      !(
+        this.y ===
+        this.vars.startY - this.stage.vars.proportions.blockSize * 11
+      )
+    ) {
+      this.y -= this.stage.vars.proportions.blockSize;
       this.createClone();
     }
-    while (!(this.x === 165)) {
-      this.x += 18;
+    while (
+      !(
+        this.x ===
+        this.vars.startX + this.stage.vars.proportions.blockSize * 22
+      )
+    ) {
+      this.x += this.stage.vars.proportions.blockSize;
       this.createClone();
     }
-    while (!(this.y === 171)) {
-      this.y += 18;
+    while (!(this.y === this.vars.startY)) {
+      this.y += this.stage.vars.proportions.blockSize;
       this.createClone();
     }
-    while (!(this.x === -213)) {
-      this.x -= 18;
+    while (!(this.x === this.vars.startX)) {
+      this.x -= this.stage.vars.proportions.blockSize;
       this.createClone();
     }
-    this.goto(-231, 171);
+    this.goto(this.vars.startX, this.vars.startY);
   }
 
   *buildInnerMap() {
-    this.y -= 36;
-    this.x += 36;
+    this.y -= this.stage.vars.blockSize * 2;
+    this.x += this.stage.vars.blockSize * 2;
     this.createClone();
     let i = 1;
     while (!(this.x === 129 && this.y === -9)) {
@@ -70,7 +88,7 @@ export default class Stone extends Sprite {
       i++;
     }
     i = 1;
-    this.goto(-231, 171);
+    this.goto(0, this.vars.startY);
   }
 
   *innerBlocksRight() {

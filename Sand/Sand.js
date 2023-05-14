@@ -39,59 +39,105 @@ export default class Sand extends Sprite {
 
   *whenGreenFlagClicked() {
     noise.seed(Math.round(Math.random() * 65536));
+    this.vars.startX =
+      this.stage.vars.proportions.width / -2 +
+      this.stage.vars.proportions.blockSize / 2;
+    this.vars.startY =
+      this.stage.vars.proportions.height / 2 -
+      this.stage.vars.proportions.blockSize / 2;
+    this.goto(this.vars.startX, this.vars.startY);
     yield* this.fillArea();
   }
 
   *left() {
     for (let i = 0; i < 20; i++) {
       this.warp(this.placeSand)();
-      this.x -= 18;
+      this.x -= this.stage.vars.proportions.blockSize;
     }
   }
 
   *down() {
     this.warp(this.placeSand)();
-    this.y -= 18;
+    this.y -= this.stage.vars.proportions.blockSize;
   }
 
   *right() {
     for (let i = 0; i < 20; i++) {
       this.warp(this.placeSand)();
-      this.x += 18;
+      this.x += this.stage.vars.proportions.blockSize;
     }
   }
 
   *fillArea() {
-    this.x += 18;
-    this.y -= 18;
-    while (!(this.x === 147 && this.y === -27)) {
-      if (this.x === -213) {
+    this.y -= this.stage.vars.proportions.blockSize;
+    this.x += this.stage.vars.proportions.blockSize;
+    const endX = -this.x;
+    const endY = -this.y;
+    while (!(this.x === endX && this.y === endY)) {
+      if (
+        this.x ===
+        this.stage.vars.proportions.width / -2 +
+          this.stage.vars.proportions.blockSize * 1.5
+      ) {
         this.warp(this.right)();
-        if (!(this.x === 147 && this.y === -27)) {
+        if (!(this.x === endX && this.y === endY)) {
           this.warp(this.down)();
         }
       } else {
         this.warp(this.left)();
-        if (!(this.x === 147 && this.y === -27)) {
+        if (!(this.x === endX && this.y === endY)) {
           this.warp(this.down)();
         }
       }
     }
     this.warp(this.placeSand)();
-    this.goto(-231, 171);
+    this.goto(this.vars.startX, this.vars.startY);
   }
   *placeSand() {
     if (
       !(
         arrayIn(
+          // Make sure no sand spawns in the top left or bottom right corners.
           [this.x, this.y],
           [
-            [-213, 153],
-            [-195, 153],
-            [-213, 135],
-            [147, -27],
-            [129, -27],
-            [147, -9],
+            // TOP LEFT
+            [
+              this.stage.vars.proportions.width / -2 +
+                this.stage.vars.proportions.blockSize * 1.5,
+              this.stage.vars.proportions.height / 2 -
+                this.stage.vars.proportions.blockSize * 1.5,
+            ],
+            [
+              this.stage.vars.proportions.width / -2 +
+                this.stage.vars.proportions.blockSize * 1.5,
+              this.stage.vars.proportions.height / 2 -
+                this.stage.vars.proportions.blockSize * 2.5,
+            ],
+            [
+              this.stage.vars.proportions.width / -2 +
+                this.stage.vars.proportions.blockSize * 2.5,
+              this.stage.vars.proportions.height / 2 -
+                this.stage.vars.proportions.blockSize * 1.5,
+            ],
+            // BOTTOM RIGHT
+            [
+              this.stage.vars.proportions.width / 2 -
+                this.stage.vars.proportions.blockSize * 1.5,
+              this.stage.vars.proportions.height / -2 +
+                this.stage.vars.proportions.blockSize * 1.5,
+            ],
+            [
+              this.stage.vars.proportions.width / 2 -
+                this.stage.vars.proportions.blockSize * 1.5,
+              this.stage.vars.proportions.height / -2 +
+                this.stage.vars.proportions.blockSize * 2.5,
+            ],
+            [
+              this.stage.vars.proportions.width / 2 -
+                this.stage.vars.proportions.blockSize * 2.5,
+              this.stage.vars.proportions.height / -2 +
+                this.stage.vars.proportions.blockSize * 1.5,
+            ],
           ]
         ) || this.touching(Color.rgb(159, 165, 189))
       ) &&

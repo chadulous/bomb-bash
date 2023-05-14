@@ -20,8 +20,6 @@ export default class Stone extends Sprite {
       }),
     ];
 
-    this.sounds = [new Sound("pop", "./Stone/sounds/pop.wav")];
-
     this.triggers = [
       new Trigger(Trigger.GREEN_FLAG, this.whenGreenFlagClicked),
     ];
@@ -75,6 +73,7 @@ export default class Stone extends Sprite {
     this.x += this.stage.vars.blockSize * 2;
     const endX = -this.x;
     const endY = -this.y;
+    this.createClone();
     let i = 1;
     while (!(this.x === endX && this.y === endY)) {
       if (this.toNumber(i) % 2 === 0) {

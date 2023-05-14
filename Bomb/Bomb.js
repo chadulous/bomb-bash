@@ -6,7 +6,7 @@ import {
   Watcher,
   Costume,
   Color,
-  Sound
+  Sound,
 } from "https://unpkg.com/leopard@^1/dist/index.esm.js";
 
 export default class Bomb extends Sprite {
@@ -16,12 +16,14 @@ export default class Bomb extends Sprite {
     this.costumes = [
       new Costume("tile_0016", "./Bomb/costumes/tile_0016.png", {
         x: 16,
-        y: 16
-      })
+        y: 16,
+      }),
     ];
 
-    this.sounds = [new Sound("pop", "./Bomb/sounds/pop.wav")];
-
-    this.triggers = [];
+    this.triggers = [new Trigger(Trigger.CLONE_START, this.onCreate)];
+  }
+  
+  *onCreate() {
+    this.effects.mosaic += 25;
   }
 }

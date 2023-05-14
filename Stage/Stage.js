@@ -21,14 +21,11 @@ export default class Stage extends StageBase {
       }),
     ];
 
-    this.sounds = [new Sound("pop", "./Stage/sounds/pop.wav")];
-
-    this.triggers = [new Trigger(Trigger.GREEN_FLAG, this.loop)];
+    this.triggers = [new Trigger(Trigger.GREEN_FLAG, this.start)];
   }
-  *loop() {
-    while (true) {
-      console.log(this.mouse.x, this.mouse.y);
-      yield;
-    }
+
+  *start() {
+    this.sprites.Player1.setPlayer(1);
+    this.sprites.Player2.setPlayer(2);
   }
 }

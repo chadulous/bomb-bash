@@ -16,15 +16,15 @@ export default class Stage extends StageBase {
     this.vars.proportions = prop;
     this.costumes = [
       new Costume("backdrop1", "./Stage/costumes/backdrop1.svg", {
-        x: 240,
-        y: 180,
+        x : 240,
+        y : 180,
       }),
     ];
 
-    this.triggers = [new Trigger(Trigger.GREEN_FLAG, this.start)];
+    this.triggers = [ new Trigger(Trigger.GREEN_FLAG, this.start) ];
   }
 
-  *start() {
+  * start() {
     this.sprites.Player1.setPlayer(1);
     this.sprites.Player2.setPlayer(2);
   }

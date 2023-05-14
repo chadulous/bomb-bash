@@ -2,12 +2,13 @@ import { Project } from "https://unpkg.com/leopard@^1/dist/index.esm.js";
 
 import Bomb from "./Bomb/Bomb.js";
 import ExplosionParticle from "./ExplosionParticle/ExplosionParticle.js";
+import Player from "./Player/Player.js";
 import Sand from "./Sand/Sand.js";
 import Stage from "./Stage/Stage.js";
 import Stone from "./Stone/Stone.js";
 
-const gameSize = 1;
-const base_height = 216;
+const gameSize = 2;
+const base_height = 234;
 const base_width = 414;
 const height = gameSize * base_height;
 const width = gameSize * base_width;
@@ -17,7 +18,6 @@ const stage = new Stage(
   { height, width, costumeNumber: 1 },
   { width, height, gameSize, blockSize }
 );
-noise.seed(Math.round(Math.random()) * 65536);
 const sprites = {
   Stone: new Stone({
     x: -231,
@@ -54,6 +54,21 @@ const sprites = {
     size: 100 * gameSize,
     visible: true,
     layerOrder: 1,
+  }),
+  Player1: new Player({
+    x: 0,
+    y: 0,
+    direction: 90,
+    size: 100 * gameSize,
+    visible: false,
+  }),
+  Player2: new Player({
+    x: 0,
+    y: 0,
+    direction: 90,
+    costumeNumber: 2,
+    size: 100 * gameSize,
+    visible: false,
   }),
 };
 

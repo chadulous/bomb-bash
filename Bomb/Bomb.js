@@ -15,13 +15,15 @@ export default class Bomb extends Sprite {
 
     this.costumes = [
       new Costume("tile_0016", "./Bomb/costumes/tile_0016.png", {
-        x : 16,
-        y : 16,
+        x: 16,
+        y: 16,
       }),
     ];
 
-    this.triggers = [ new Trigger(Trigger.CLONE_START, this.onCreate) ];
+    this.triggers = [new Trigger(Trigger.CLONE_START, this.onCreate)];
   }
 
-  * onCreate() { this.effects.mosaic += 25; }
+  *onCreate() {
+    this.effects.mosaic += 25;
+  }
 }

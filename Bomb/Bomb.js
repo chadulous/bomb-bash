@@ -1,4 +1,4 @@
-/* eslint-disable require-yield, eqeqeq */
+l/* eslint-disable require-yield, eqeqeq */
 
 import {
   Sprite,
@@ -24,6 +24,10 @@ export default class Bomb extends Sprite {
   }
   
   *onCreate() {
-    this.effects.mosaic += 25;
+    for(let i = 0; i < 16) {
+      this.effects.mosaic += 6.25
+      yield* this.wait(0.25)
+    }
+    console.log('explode')
   }
 }

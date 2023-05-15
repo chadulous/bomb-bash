@@ -20,8 +20,8 @@ const stage = new Stage(
 );
 const sprites = {
   Stone: new Stone({
-    x: -231,
-    y: 171,
+    x: 0,
+    y: 0,
     direction: 90,
     costumeNumber: 1,
     size: 100 * gameSize,
@@ -29,8 +29,8 @@ const sprites = {
     layerOrder: 4,
   }),
   Sand: new Sand({
-    x: -231,
-    y: 171,
+    x: 0,
+    y: 0,
     direction: 90,
     costumeNumber: 1,
     size: 100 * gameSize,
@@ -38,8 +38,8 @@ const sprites = {
     layerOrder: 3,
   }),
   Bomb: new Bomb({
-    x: -42,
-    y: -81,
+    x: 0,
+    y: 0,
     direction: 90,
     costumeNumber: 1,
     size: 100 * gameSize,
@@ -47,8 +47,8 @@ const sprites = {
     layerOrder: 2,
   }),
   ExplosionParticle: new ExplosionParticle({
-    x: -60,
-    y: -36,
+    x: 0,
+    y: 0,
     direction: 90,
     costumeNumber: 1,
     size: 100 * gameSize,
